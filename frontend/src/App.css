@@ -1,0 +1,129 @@
+/* ══════════════════════════════════════════════════════════════
+   App Layout — 40/60 split with responsive behavior
+   ══════════════════════════════════════════════════════════════ */
+
+.app {
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
+}
+
+/* ── Search Header (full-width when no results) ─────────────── */
+.app-search-header {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  min-height: 100vh;
+  transition: min-height var(--transition-slow);
+}
+
+.app-search-header.compact {
+  min-height: auto;
+  padding: var(--space-md) 0;
+  border-bottom: 1px solid var(--border);
+  background: var(--bg-card);
+}
+
+.app-search-header.compact .search-section {
+  padding: var(--space-md) var(--space-lg);
+}
+
+.app-search-header.compact .brand {
+  display: flex;
+  align-items: center;
+  gap: var(--space-md);
+  margin-bottom: var(--space-md);
+}
+
+.app-search-header.compact .brand-logo {
+  margin-bottom: 0;
+}
+
+.app-search-header.compact .brand h1 {
+  font-size: 1.5rem;
+}
+
+.app-search-header.compact .brand-subtitle {
+  display: none;
+}
+
+.app-search-header.compact .example-chips {
+  display: none;
+}
+
+.app-search-header.compact .search-form {
+  margin-bottom: 0;
+}
+
+/* ── Results Split Layout ───────────────────────────────────── */
+.app-results {
+  flex: 1;
+  display: grid;
+  grid-template-columns: 40% 60%;
+  height: calc(100vh - 130px);
+  overflow: hidden;
+}
+
+/* ── Responsive ─────────────────────────────────────────────── */
+@media (max-width: 900px) {
+  .app-results {
+    grid-template-columns: 1fr;
+    grid-template-rows: 1fr 1fr;
+    height: auto;
+  }
+
+  .tool-feed {
+    border-right: none;
+    border-bottom: 1px solid var(--border);
+    max-height: 40vh;
+  }
+
+  .report-panel {
+    max-height: 60vh;
+  }
+}
+
+@media (max-width: 600px) {
+  .app-search-header.compact .brand h1 {
+    font-size: 1.2rem;
+  }
+
+  .search-input {
+    font-size: 0.9rem;
+    padding: 12px 16px 12px 42px;
+  }
+
+  .research-btn {
+    padding: 12px 20px;
+    font-size: 0.85rem;
+  }
+}
+
+/* ── Error Banner ───────────────────────────────────────────── */
+.app-error-banner {
+  padding: 12px var(--space-lg);
+  background: rgba(239, 68, 68, 0.08);
+  border-bottom: 1px solid rgba(239, 68, 68, 0.2);
+  color: #fca5a5;
+  font-size: 0.9rem;
+  display: flex;
+  align-items: center;
+  gap: var(--space-sm);
+  animation: fadeIn 0.3s ease;
+}
+
+.app-error-banner button {
+  margin-left: auto;
+  padding: 4px 12px;
+  background: rgba(239, 68, 68, 0.15);
+  border: 1px solid rgba(239, 68, 68, 0.3);
+  border-radius: var(--radius-sm);
+  color: #fca5a5;
+  font-size: 0.8rem;
+  cursor: pointer;
+  font-family: var(--font-sans);
+}
+
+.app-error-banner button:hover {
+  background: rgba(239, 68, 68, 0.25);
+}
