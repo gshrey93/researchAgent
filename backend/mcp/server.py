@@ -118,7 +118,7 @@ async def structure_report(topic: str, findings: str) -> str:
 
     Returns:
         JSON string with structured report containing summary, key_findings,
-        sources, confidence level, and word_count.
+        action_items, follow_up_questions, sources, confidence level, and word_count.
     """
     import google.generativeai as genai
 
@@ -141,6 +141,8 @@ Return ONLY valid JSON with this exact structure (no markdown fences):
 {{
     "summary": "A comprehensive 2-3 paragraph summary of the findings (200-400 words)",
     "key_findings": ["finding 1", "finding 2", "...up to 10 findings"],
+    "action_items": ["actionable step 1", "actionable step 2"],
+    "follow_up_questions": ["further research question 1", "further research question 2"],
     "sources": [{{"title": "source title", "url": "https://..."}}, ...],
     "confidence": "high|medium|low",
     "word_count": <integer word count of summary>
@@ -149,6 +151,8 @@ Return ONLY valid JSON with this exact structure (no markdown fences):
 Guidelines:
 - The summary must be detailed, informative, and well-written
 - Include 5-10 key findings, each a clear and concise statement
+- Include 2-5 practical action items based on the research
+- Include 2-3 logical follow-up questions to deepen the research
 - List all referenced URLs as sources with descriptive titles
 - Set confidence based on source quality, consistency, and coverage:
   high = multiple authoritative sources agreeing
@@ -179,6 +183,8 @@ Return ONLY the JSON object, nothing else."""
         report = {
             "summary": parsed.get("summary", ""),
             "key_findings": parsed.get("key_findings", []),
+            "action_items": parsed.get("action_items", []),
+            "follow_up_questions": parsed.get("follow_up_questions", []),
             "sources": parsed.get("sources", []),
             "confidence": parsed.get("confidence", "medium"),
             "word_count": parsed.get("word_count", len(parsed.get("summary", "").split())),
@@ -191,6 +197,8 @@ Return ONLY the JSON object, nothing else."""
             {
                 "summary": text[:2000] if text else "Failed to structure report",
                 "key_findings": [],
+                "action_items": [],
+                "follow_up_questions": [],
                 "sources": [],
                 "confidence": "low",
                 "word_count": len(text.split()) if text else 0,
