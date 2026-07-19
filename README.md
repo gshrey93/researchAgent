@@ -14,23 +14,97 @@ An AI-powered research agent that autonomously searches, reads, and synthesizes 
 3. Watch live tool calls stream in real-time
 4. Get a structured report with summary, key findings, and sources
 
-## Quick Start
+## Setup & Prerequisites
+
+### Prerequisites
+
+Ensure you have the following installed on your machine:
+- **Python**: 3.10 or higher
+- **Node.js**: v18.0.0 or higher (`npm` included)
+- **Gemini API Key**: Obtain a free API key from [Google AI Studio](https://aistudio.google.com/apikey)
+
+---
+
+## Installation & Setup
+
+### 1. Environment Configuration
+
+Copy the example environment file and add your Gemini API Key:
 
 ```bash
-# 1. Configure
 cp .env.example .env
-# Add your Gemini API key (https://aistudio.google.com/apikey)
-
-# 2. Backend
-python3 -m venv venv && source venv/bin/activate
-pip install -r requirements.txt
-uvicorn backend.main:app --reload --port 8000
-
-# 3. Frontend (new terminal)
-cd frontend && npm install && npm run dev
 ```
 
-Open **http://localhost:5173**
+Open `.env` in your editor and set your key:
+```env
+GEMINI_API_KEY=your_actual_gemini_api_key_here
+```
+
+### 2. Backend Setup
+
+From the project root directory, set up a Python virtual environment and install the required packages:
+
+```bash
+# Create virtual environment
+python3 -m venv venv
+
+# Activate virtual environment
+# On macOS/Linux:
+source venv/bin/activate
+# On Windows (Command Prompt / PowerShell):
+# venv\Scripts\activate
+
+# Install dependencies
+pip install -r requirements.txt
+```
+
+### 3. Frontend Setup
+
+Navigate into the `frontend` directory and install Node modules:
+
+```bash
+cd frontend
+npm install
+cd ..
+```
+
+---
+
+## Running the Application
+
+To run the application, you need to start both the **FastAPI Backend** and the **Vite Frontend**.
+
+### Step 1: Start the Backend Server
+
+From the project root directory (with virtual environment activated):
+
+```bash
+uvicorn backend.main:app --reload --port 8000
+```
+> The backend will be running at `http://localhost:8000`. You can test API endpoints and view interactive Swagger docs at `http://localhost:8000/docs`.
+
+### Step 2: Start the Frontend Development Server
+
+In a new terminal window, navigate to the `frontend` directory and run:
+
+```bash
+cd frontend
+npm run dev
+```
+> The frontend development server will launch at `http://localhost:5173`.
+
+### Step 3: Open the Web Application
+
+Open your browser and navigate to:
+**[http://localhost:5173](http://localhost:5173)**
+
+Enter any research query (e.g., *"Latest developments in quantum computing"* or *"State of AI in drug discovery"*) to observe ARIA perform live web searches, fetch web pages, and structure comprehensive research reports.
+
+---
+
+## System Guidelines & Specifications
+
+For detailed information on ARIA's agent prompt, research rules, tool declarations, and inner loop specifications, see [Instructions.md](file:///Users/shreyash/projects/aria/Instructions.md).
 
 ## Architecture
 
