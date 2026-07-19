@@ -1,0 +1,15 @@
+# ARIA Backend Dependencies
+fastapi>=0.115.0
+uvicorn[standard]>=0.30.0
+python-dotenv>=1.0.0
+
+# AI / LLM
+google-generativeai>=0.8.0
+
+# MCP (Model Context Protocol)
+mcp>=1.0.0
+
+# Web scraping tools
+duckduckgo-search>=6.0.0
+httpx>=0.27.0
+beautifulsoup4>=4.12.0
